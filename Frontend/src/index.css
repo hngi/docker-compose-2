@@ -65,14 +65,9 @@ body {
     cursor: pointer;
 }
 
-.btn-delete {
-    background-color: #e74c3c;
-    color: white;
-}
-
-.btn-update {
-    background-color: #3498db;
-    color: white;
+.btn-update-delete{
+ display: flex;
+ flex-direction: row;
 }
 
 .btn {

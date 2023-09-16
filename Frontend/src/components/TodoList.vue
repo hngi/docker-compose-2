@@ -32,8 +32,10 @@
                 <span v-else>Incomplete</span>
               </td>
               <td>
-                <button class="btn btn-update" @click="updateTodo(todo)" title="delete"><i class="fa-regular fa-trash-can"></i></button>
-                <button class="btn btn-delete" @click="deleteTodo(todo._id)" title="edit"><i class="fa-solid fa-pen"></i></button>
+                <div class="btn-update-delete">
+                  <button class="btn btn-update" @click="updateTodo(todo)" title="delete">&#128394;</button>
+                <button class="btn btn-delete" @click="deleteTodo(todo._id)" title="edit">&#9003;</button>
+                </div>
               </td>
             </tr>
           </tbody>
