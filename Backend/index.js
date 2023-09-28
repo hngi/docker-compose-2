@@ -7,6 +7,8 @@ require('dotenv').config();
 const app = express();
 const port = 3000;
 
+const nodeEnv = process.env.NODE_ENV || 'development';
+
 // Enable CORS
 app.use(cors());
 
@@ -30,13 +32,11 @@ app.post('/todos_create', async (req, res) => {
 
 // Get all todos
 app.get('/todos', async (req, res) => {
-  if (process.env.NODE_ENV === 'production') {
+  if (nodeEnv === 'production') {
       res.status(403).json({ message: 'This feature is not available in the production environment.' });
-  } else if (process.env.NODE_ENV === 'development') {
+  } else {
       const todos = await Todo.find();
       res.json(todos);
-  } else {
-    res.status(403).json({ message: 'This feature is not available' });
   }
 });
 
