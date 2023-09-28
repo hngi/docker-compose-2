@@ -1,19 +1,24 @@
 <template>
-  <div class="todo-container">
-    <div class="todo-list">
-      <h1>Todo List</h1>
-      <div class="todo-form">
-        <input class="todo-input" v-model="newTodo.title" placeholder="Add new todo title" />
-        <input class="todo-input" v-model="newTodo.description" placeholder="Add description" />
-        <input type="checkbox" v-model="newTodo.completed" /> Completed
-        <input type="date" v-model="newTodo.dueDate" />
-        <button class="btn btn-add" @click="addTodo">Add Todo</button>
-      </div>
-    </div>
+  <div>
     <div v-if="error" class="error-message">
       {{ error }}
     </div>
-    <div v-else class="todo-items">
+
+    <div v-else class="container">
+      <div class="todo-container">
+        <div class="todo-list">
+          <h1>Todo List</h1>
+          <div class="todo-form">
+            <input class="todo-input" v-model="newTodo.title" placeholder="Add new todo title" />
+            <input class="todo-input" v-model="newTodo.description" placeholder="Add description" />
+            <input type="checkbox" v-model="newTodo.completed" /> Completed
+            <input type="date" v-model="newTodo.dueDate" />
+            <button class="btn btn-add" @click="addTodo">Add Todo</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="todo-items">
       <table>
         <thead>
           <tr>
@@ -44,8 +49,10 @@
         </tbody>
       </table>
     </div>
+    </div> 
   </div>
 </template>
+
 
 <script setup>
   import { ref } from 'vue';
@@ -58,13 +65,13 @@
     completed: false,
     dueDate: null
   });
-  const error = ref(null);
+  const error = ref();
 
   const fetchTodos = async () => {
     try {
       const response = await axios.get('http://localhost:3000/todos');
       todos.value = response.data;
-    } catch (err) {
+    } catch (err) { 
       error.value = err.response?.data?.message || "An error occurred while fetching todos.";
     }
   };

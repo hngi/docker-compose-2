@@ -31,12 +31,15 @@ app.post('/todos_create', async (req, res) => {
 // Get all todos
 app.get('/todos', async (req, res) => {
   if (process.env.NODE_ENV === 'production') {
-      res.send('This feature is not available in the production environment.');
-  } else {
+      res.status(403).json({ message: 'This feature is not available in the production environment.' });
+  } else if (process.env.NODE_ENV === 'development') {
       const todos = await Todo.find();
       res.json(todos);
+  } else {
+    res.status(403).json({ message: 'This feature is not available' });
   }
 });
+
 
 // Get a single todo by ID
 app.get('/todos/:id', async (req, res) => {
